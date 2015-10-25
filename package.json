@@ -1,0 +1,34 @@
+{
+  "name": "winston-nsq-transport",
+  "version": "1.0.0",
+  "description": "Winston NSQ transport. Uses official NSQ client library (nsqjs).",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "vows --spec ./test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nololabout/winston-nsq-transport.git"
+  },
+  "keywords": [
+    "winston",
+    "transport",
+    "NSQ",
+    "nsqjs"
+  ],
+  "author": "Andrei Tretyakov <andrei.tretyakov@gmail.com> (https://github.com/nololabout)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nololabout/winston-nsq-transport/issues"
+  },
+  "homepage": "https://github.com/nololabout/winston-nsq-transport#readme",
+  "dependencies": {
+    "nsqjs": "^0.7.7",
+    "winston": "^1.1.0"
+  },
+  "devDependencies": {
+    "vows": "^0.8.1"
+  }
+}
