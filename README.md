@@ -7,7 +7,9 @@ Winston NSQ transport. Uses official NSQ client library (nsqjs).
 
   - Latest release:
 
-    $ npm install winston-nsq-transport
+  ``` bash
+  $ npm install winston-nsq-transport
+  ```
 
 
 ## Options
@@ -58,10 +60,20 @@ logger.log('info', 'message', {});
 
 ```
 
+## Run Tests
+
+The tests are written in [vows][0], and designed to be run with npm.
+
+``` bash
+  $ npm test
+```
+
 ## AUTHORS
 
-[AUTHORS](https://github.com/nololabout/winston-pg-native/blob/master/AUTHORS)
+[AUTHORS](https://github.com/nololabout/winston-nsq-transport/blob/master/AUTHORS)
 
 ## LICENSE
 
 MIT
+
+[0]: http://vowsjs.org

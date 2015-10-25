@@ -24,7 +24,7 @@ reader.connect();
 
 reader.on('nsqd_closed', function() {
   process.exit(0);
-})
+});
 
 var vows = require('vows'),
   assert = require('assert');
@@ -39,7 +39,7 @@ vows
         var self = this;
 
         reader.on('message', function(msg) {
-          msg.finish()
+          msg.finish();
           self.callback(null, msg.json());
           reader.close();
         });
@@ -48,7 +48,7 @@ vows
           self.callback(err);
         });
       },
-      'Should pass no err': function(err, data) {
+      'Should pass no err': function(err) {
         assert.equal(err, null, 'Should have no err');
       },
       'Should pass level info': function(err, data) {

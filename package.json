@@ -1,6 +1,6 @@
 {
   "name": "winston-nsq-transport",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Winston NSQ transport. Uses official NSQ client library (nsqjs).",
   "directories": {
     "test": "test"
@@ -24,9 +24,10 @@
     "url": "https://github.com/nololabout/winston-nsq-transport/issues"
   },
   "homepage": "https://github.com/nololabout/winston-nsq-transport#readme",
+  "main": "lib/winston-nsq-transport.js",
   "dependencies": {
-    "nsqjs": "^0.7.7",
-    "winston": "^1.1.0"
+    "nsqjs": "^0.7.8",
+    "winston": "^2.1.1"
   },
   "devDependencies": {
     "vows": "^0.8.1"
