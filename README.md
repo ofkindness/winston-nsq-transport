@@ -1,5 +1,7 @@
-winston-nsq-transport
-=================
+# winston-nsq-transport
+[![NPM version](https://img.shields.io/npm/v/winston-nsq-transport.svg)](https://npmjs.org/package/winston-nsq-transport)
+[![Dependency Status](https://david-dm.org/ofkindness/winston-nsq-transport.svg?theme=shields.io)](https://david-dm.org/ofkindness/winston-nsq-transport)
+[![NPM Downloads](https://img.shields.io/npm/dm/winston-nsq-transport.svg)](https://npmjs.org/package/winston-nsq-transport)
 
 Winston NSQ transport. Uses official NSQ client library (nsqjs).
 
@@ -30,7 +32,7 @@ var options = {
 };
 ```
 
-## Usage 
+## Usage
 
 
 ``` js
@@ -62,18 +64,12 @@ logger.log('info', 'message', {});
 
 ## Run Tests
 
-The tests are written in [vows][0], and designed to be run with npm.
+The tests are written in [vows](http://vowsjs.org), and designed to be run with npm.
 
 ``` bash
   $ npm test
 ```
 
-## AUTHORS
-
-[AUTHORS](https://github.com/nololabout/winston-nsq-transport/blob/master/AUTHORS)
-
 ## LICENSE
 
-MIT
-
-[0]: http://vowsjs.org
+[MIT License](http://en.wikipedia.org/wiki/MIT_License)
