@@ -48,7 +48,7 @@ vows
           self.callback(err);
         });
       },
-      'Should pass no err': function(err) {
+      'Should pass no err': function(err, data) {
         assert.equal(err, null, 'Should have no err');
       },
       'Should pass level info': function(err, data) {
