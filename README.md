@@ -1,4 +1,5 @@
 # winston-nsq-transport
+
 [![NPM version](https://img.shields.io/npm/v/winston-nsq-transport.svg)](https://npmjs.org/package/winston-nsq-transport)
 [![Dependency Status](https://david-dm.org/ofkindness/winston-nsq-transport.svg?theme=shields.io)](https://david-dm.org/ofkindness/winston-nsq-transport)
 [![NPM Downloads](https://img.shields.io/npm/dm/winston-nsq-transport.svg)](https://npmjs.org/package/winston-nsq-transport)
@@ -9,7 +10,7 @@ Winston NSQ transport. Uses official NSQ client library (nsqjs).
 
   - Latest release:
 
-  ``` bash
+  ```bash
   $ npm install winston-nsq-transport
   ```
 
@@ -23,8 +24,8 @@ Winston NSQ transport. Uses official NSQ client library (nsqjs).
 
 See the default values used:
 
-``` js
-var options = {
+```js
+const options = {
   nsqdHost: '127.0.0.1',
   nsqdPort: 4150,
   topic: 'winston_logs',
@@ -35,13 +36,11 @@ var options = {
 ## Usage
 
 
-``` js
-'use strict';
+```js
+const winston = require('winston');
+require('winston-nsq-transport');
 
-var winston = require("winston");
-require("winston-nsq-transport");
-
-var logger = new(winston.Logger)({
+const logger = new(winston.Logger)({
   transports: [
     new(winston.transports.Nsq)({
       nsqdHost: '127.0.0.1',
@@ -56,7 +55,7 @@ module.exports = logger;
 ```
 
 
-``` js
+```js
 
 logger.log('info', 'message', {});
 
@@ -66,7 +65,7 @@ logger.log('info', 'message', {});
 
 The tests are written in [vows](http://vowsjs.org), and designed to be run with npm.
 
-``` bash
+```bash
   $ npm test
 ```
 
