@@ -1,63 +1,69 @@
-'use strict';
+/**
+ * @module 'winston-nsq-transport-test'
+ * @fileoverview Tests of winston transport for logging with NSQ
+ * @license MIT
+ * @author Andrei Tretyakov <andrei.tretyakov@gmail.com>
+ */
+const assert = require('assert');
+const nsqjs = require('nsqjs');
+const vows = require('vows');
+const winston = require('winston');
 
-var winston = require('winston');
-require(__dirname + '/../lib/winston-nsq-transport');
+const NSQTransport = require('./../lib/winston-nsq-transport');
 
-var logger = new(winston.Logger)({
+const nsqdHost = process.env.NSQ_SERVER_PORT_4150_TCP_ADDR || '127.0.0.1';
+const nsqdPort = process.env.NSQ_SERVER_PORT_4150_TCP_PORT || '4150';
+
+const logger = new (winston.Logger)({
   transports: [
-    new(winston.transports.Nsq)({
-      nsqdHost: (process.env.NSQ_SERVER_PORT_4150_TCP_ADDR || '127.0.0.1'),
-      nsqdPort: (process.env.NSQ_SERVER_PORT_4150_TCP_PORT || 4150),
-      topic: 'test',
-      level: 'info'
+    new (NSQTransport)({
+      topic: 'winston_logs',
+      nsqdHost,
+      nsqdPort
     })
   ]
 });
 
-var nsqjs = require('nsqjs');
-
-var reader = new nsqjs.Reader('test', 'test', {
-  nsqdTCPAddresses: ((process.env.NSQ_SERVER_PORT_4150_TCP_ADDR || '127.0.0.1') + ':' + (process.env.NSQ_SERVER_PORT_4150_TCP_PORT || 4150))
+const reader = new nsqjs.Reader('winston_logs', 'logs', {
+  nsqdTCPAddresses: `${nsqdHost}:${nsqdPort}`
 });
 
 reader.connect();
 
-reader.on('nsqd_closed', function() {
+reader.on('nsqd_closed', () => {
   process.exit(0);
 });
 
-var vows = require('vows'),
-  assert = require('assert');
-
-logger.log('info', 'message', {});
+logger.log('info', 'message', { foo: 'bar' });
 
 vows
   .describe('winston-nsq-transport')
   .addBatch({
     'log info message with meta object': {
-      topic: function() {
-        var self = this;
+      topic: function topic() {
+        const self = this;
 
-        reader.on('message', function(msg) {
+        reader.on('message', (msg) => {
           msg.finish();
           self.callback(null, msg.json());
           reader.close();
         });
 
-        reader.on('error', function(err) {
+        reader.on('error', (err) => {
           self.callback(err);
         });
       },
-      'Should pass no err': function(err, data) {
+      /* eslint no-unused-vars: 0 */
+      'Should pass no err': (err, data) => {
         assert.equal(err, null, 'Should have no err');
       },
-      'Should pass level info': function(err, data) {
+      'Should pass level info': (err, data) => {
         assert.equal(data.level, 'info', 'Should pass level info');
       },
-      'Should pass message': function(err, data) {
+      'Should pass message': (err, data) => {
         assert.equal(data.message, 'message', 'Should pass level info');
       },
-      'Should pass meta object': function(err, data) {
+      'Should pass meta object': (err, data) => {
         assert.isObject(data.meta, 'Should have no err');
       }
     }
