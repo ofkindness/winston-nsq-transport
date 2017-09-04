@@ -1,5 +1,6 @@
 # winston-nsq-transport
 
+[![CircleCI](https://circleci.com/gh/ofkindness/winston-nsq-transport/tree/master.svg?style=svg)](https://circleci.com/gh/ofkindness/winston-nsq-transport/tree/master)
 [![NPM version](https://img.shields.io/npm/v/winston-nsq-transport.svg)](https://npmjs.org/package/winston-nsq-transport)
 [![Dependency Status](https://david-dm.org/ofkindness/winston-nsq-transport.svg?theme=shields.io)](https://david-dm.org/ofkindness/winston-nsq-transport)
 [![NPM Downloads](https://img.shields.io/npm/dm/winston-nsq-transport.svg)](https://npmjs.org/package/winston-nsq-transport)
@@ -52,7 +53,7 @@ const logger = new (winston.Logger)({
 module.exports = logger;
 ```
 
-
+## Logging
 ```js
 
 logger.log('info', 'message', {});

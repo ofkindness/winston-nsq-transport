@@ -9,6 +9,7 @@ const nsqjs = require('nsqjs');
 const vows = require('vows');
 const winston = require('winston');
 
+const helpers = require('./../node_modules/winston/test/helpers');
 const NSQTransport = require('./../lib/winston-nsq-transport');
 
 const nsqdHost = process.env.NSQ_SERVER_PORT_4150_TCP_ADDR || '127.0.0.1';
@@ -34,38 +35,32 @@ reader.on('nsqd_closed', () => {
   process.exit(0);
 });
 
-logger.log('info', 'message', { foo: 'bar' });
+reader.on('message', (msg) => {
+  msg.finish();
+  reader.close();
+});
+
+reader.on('error', (err) => {
+  throw err;
+});
+
+const transport = logger.transports.NSQ;
 
 vows
   .describe('winston-nsq-transport')
   .addBatch({
-    'log info message with meta object': {
-      topic: function topic() {
-        const self = this;
-
-        reader.on('message', (msg) => {
-          msg.finish();
-          self.callback(null, msg.json());
-          reader.close();
-        });
-
-        reader.on('error', (err) => {
-          self.callback(err);
-        });
+    'An instance of the NSQ Transport': {
+      topic: logger,
+      'when passed valid options': {
+        'should have the proper methods defined': () => {
+          assert.isFunction(transport.log);
+        }
       },
-      /* eslint no-unused-vars: 0 */
-      'Should pass no err': (err, data) => {
-        assert.equal(err, null, 'Should have no err');
-      },
-      'Should pass level info': (err, data) => {
-        assert.equal(data.level, 'info', 'Should pass level info');
-      },
-      'Should pass message': (err, data) => {
-        assert.equal(data.message, 'message', 'Should pass level info');
-      },
-      'Should pass meta object': (err, data) => {
-        assert.isObject(data.meta, 'Should have no err');
-      }
+      'the log() method': helpers.testNpmLevels(transport,
+        'should respond with true', (ign, err, logged) => {
+          assert.isNull(err);
+          assert.isNotNull(logged);
+        }
+      )
     }
-  })
-  .export(module);
+  }).export(module);
