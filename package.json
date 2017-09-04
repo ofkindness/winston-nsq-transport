@@ -1,12 +1,12 @@
 {
   "name": "winston-nsq-transport",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Winston NSQ transport. Uses official NSQ client library (nsqjs).",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "vows --spec ./test/*"
+    "test": "vows --spec ./test/*-test.js"
   },
   "repository": {
     "type": "git",
