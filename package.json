@@ -1,6 +1,6 @@
 {
   "name": "winston-nsq-transport",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Winston NSQ transport. Uses official NSQ client library (nsqjs).",
   "directories": {
     "test": "test"
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "circular-json": "^0.3.3",
-    "nsqjs": "^0.8.4",
+    "nsqjs": "^0.9.0",
     "vows": "^0.8.1",
     "winston": "^2.3.1"
   },
@@ -43,7 +43,6 @@
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.3.0",
-    "mocha": "^3.5.0"
+    "eslint-plugin-react": "^7.3.0"
   }
 }
