@@ -19,6 +19,7 @@
 * __level:__ The winston's log level, default: "info"
 * __nsqdHost:__ A string representing the host of nsqd instance.
 * __nsqdPort:__ A string representing the port of nsqd instance.
+* __nsqOptions:__ An object representing the nsqjs writer [options](https://github.com/dudleycarr/nsqjs#new-writer)
 * __topic:__ A string representing NSQ topic.
 
 See the default values used:
@@ -28,6 +29,9 @@ const options = {
   level: 'info',
   nsqdHost: '127.0.0.1',
   nsqdPort: '4150',
+  nsqOptions: {
+    clientId: 'winston-nsq-transport'
+  },
   topic: 'winston_logs'
 };
 ```
