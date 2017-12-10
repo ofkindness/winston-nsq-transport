@@ -5,9 +5,9 @@
  * @author Andrei Tretyakov <andrei.tretyakov@gmail.com>
  */
 const assert = require('assert');
+const { Logger } = require('winston');
 const nsqjs = require('nsqjs');
 const vows = require('vows');
-const winston = require('winston');
 
 const helpers = require('./../node_modules/winston/test/helpers');
 const NSQTransport = require('./../lib/winston-nsq-transport');
@@ -15,9 +15,9 @@ const NSQTransport = require('./../lib/winston-nsq-transport');
 const nsqdHost = process.env.NSQ_SERVER_PORT_4150_TCP_ADDR || '127.0.0.1';
 const nsqdPort = process.env.NSQ_SERVER_PORT_4150_TCP_PORT || '4150';
 
-const logger = new (winston.Logger)({
+const logger = new Logger({
   transports: [
-    new (NSQTransport)({
+    new NSQTransport({
       topic: 'winston_logs',
       nsqdHost,
       nsqdPort
@@ -57,7 +57,8 @@ vows
           assert.isFunction(transport.log);
         }
       },
-      'the log() method': helpers.testNpmLevels(transport,
+      'the log() method': helpers.testNpmLevels(
+        transport,
         'should respond with true', (ign, err, logged) => {
           assert.isNull(err);
           assert.isNotNull(logged);

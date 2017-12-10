@@ -40,16 +40,15 @@ const options = {
 
 
 ```js
-const winston = require('winston');
+const { Logger } = require('winston');
 const NSQTransport = require('winston-nsq-transport');
 
-const logger = new (winston.Logger)({
+const logger = new Logger({
   transports: [
-    new (NSQTransport)({
-      nsqdHost: '127.0.0.1',
-      nsqdPort: '4150',
+    new NSQTransport({
       topic: 'winston_logs',
-      level: 'info'
+      nsqdHost,
+      nsqdPort
     })
   ]
 });
